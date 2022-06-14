@@ -28,7 +28,7 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS = ['git.heroku.com/fast-cliffs-03764.git', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['fast-cliffs-03764.herokuapp.com', '127.0.0.1', '0.0.0.0']
 
 CORS_ALLOWED_ORIGINS = []
 
