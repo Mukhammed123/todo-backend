@@ -8,7 +8,7 @@ from rest_framework import status
 
 # Class based api views
 
-class TodoListView(APIView):
+class TodoView(APIView):
 
   def get(self, request, format=None):
     todos = Todo.objects.all()
@@ -24,29 +24,30 @@ class TodoListView(APIView):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
   
 
-class TodoListDetailView(APIView):
+class TodoDetailView(APIView):
 
   def get_object(self, pk):
     try:
-      return TodoList.objects.get(id=pk)
+      return Todo.objects.get(id=pk)
     except:
       return Http404
   
   def get(self, request, pk, format=None):
     todoItem = self.get_object(pk)
-    serializer = TodoListSerializer(todoItem, many=False)
+    serializer = TodoSerializer(todoItem, many=False)
     return Response(serializer.data)
 
   def put(self, request, pk, format=None):
     todoItem = self.get_object(pk)
     data = request.data
-    serializer = TodoListSerializer(instance=todoItem, data=data)
+    serializer = TodoSerializer(instance=todoItem, data=data)
     if serializer.is_valid():
       serializer.save()
       return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
   def delete(self, request, pk, format=None):
+    print("Key: ", pk)
     todoItem = self.get_object(pk)
     todoItem.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)

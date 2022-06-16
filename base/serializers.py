@@ -5,7 +5,7 @@ from .models import Todo
 class TodoSerializer(serializers.ModelSerializer):
   class Meta:
     model = Todo
-    fields = ['id', 'title']
+    fields = '__all__'
 
 class TodoListSerializer(serializers.ModelSerializer):
   class Meta:
