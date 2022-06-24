@@ -3,6 +3,7 @@ from .models import TodoList, Todo
 from .serializers import TodoListSerializer, TodoSerializer
 from django.http import Http404
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -10,13 +11,18 @@ from rest_framework import status
 
 class TodoView(APIView):
 
+  permission_classes = (IsAuthenticated, )
+
   def get(self, request, format=None):
-    todos = Todo.objects.all()
+    user = request.user
+    todos = user.todos.all()
     serializer = TodoSerializer(todos, many=True)
     return Response(serializer.data)
+    # return Response({"message": "hello world"})
   
   def post(self, request, format=None):
-    data = request.data
+    data = request.data 
+    data['owner'] = request.user
     serializer = TodoSerializer(data=data)
     if serializer.is_valid():
       serializer.save()
@@ -25,6 +31,7 @@ class TodoView(APIView):
   
 
 class TodoDetailView(APIView):
+  permission_classes = (IsAuthenticated, )
 
   def get_object(self, pk):
     try:
@@ -54,6 +61,7 @@ class TodoDetailView(APIView):
 
 
 class TodoItemsView(APIView):
+  permission_classes = (IsAuthenticated, )
 
   def get(self, request, format=None):
     todoItems = TodoList.objects.all()
@@ -69,6 +77,7 @@ class TodoItemsView(APIView):
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class TodoItemsDetailView(APIView):
+  permission_classes = (IsAuthenticated, )
 
   def get_todo_items(self, pk):
     try:
@@ -101,8 +110,6 @@ class TodoItemsDetailView(APIView):
     todoItem = self.get_object(pk)
     todoItem.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
-
-
 
 
 
