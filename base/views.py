@@ -51,6 +51,7 @@ class TodoDetailView(APIView):
   def put(self, request, pk, format=None):
     todoItem = self.get_object(pk)
     data = request.data
+    print(data)
     serializer = TodoSerializer(instance=todoItem, data=data)
     if serializer.is_valid():
       serializer.save()
