@@ -1,6 +1,5 @@
-from cmath import nan
 from .models import TodoList, Todo
-from .serializers import TodoListSerializer, TodoSerializer
+from .serializers import TodoListSerializer, TodoSerializer, CreateTodoSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
@@ -18,15 +17,20 @@ class TodoView(APIView):
     todos = user.todos.all()
     serializer = TodoSerializer(todos, many=True)
     return Response(serializer.data)
-    # return Response({"message": "hello world"})
   
   def post(self, request, format=None):
     data = request.data 
-    data['owner'] = request.user
-    serializer = TodoSerializer(data=data)
+    user = request.user
+    # new_todo = Todo.objects.create(
+    #   owner=user,
+    #   title=data["title"]
+    # )
+    # data = TodoSerializer(new_todo).data
+    data['owner'] = user.id
+    serializer = CreateTodoSerializer(data=data)
     if serializer.is_valid():
       serializer.save()
-      return Response(serializer.data, status=status.HTTP_201_CREATED)
+      return Response(data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
   
 

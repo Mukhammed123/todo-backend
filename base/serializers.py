@@ -14,6 +14,14 @@ class TodoSerializer(serializers.ModelSerializer):
       'owner'
     ]
 
+class CreateTodoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Todo
+    fields = [
+      'title',
+      'owner'
+    ]
+
 class TodoListSerializer(serializers.ModelSerializer):
   class Meta:
     model = TodoList
