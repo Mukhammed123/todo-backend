@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Todo(models.Model):
-  title = models.CharField(max_length=255)
+  title = models.CharField(max_length=255, unique=True)
   owner = models.ForeignKey('auth.User', related_name='todos', on_delete=models.CASCADE, default=None)
 
   class Meta:
@@ -12,7 +12,7 @@ class Todo(models.Model):
     return self.title
 
 class TodoList(models.Model):
-  description = models.TextField()
+  description = models.TextField(unique=True)
   finished = models.BooleanField()
   todo_id = models.ForeignKey(Todo, on_delete=models.CASCADE, related_name="todo")
 
