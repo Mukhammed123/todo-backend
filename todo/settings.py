@@ -128,27 +128,27 @@ WSGI_APPLICATION = 'todo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'da3tb0l1sfrabg',
-#         'HOST': 'ec2-23-23-182-238.compute-1.amazonaws.com',
-#         'PORT': 5432,
-#         'USER': 'qivypxvvnrcwdv',
-#         'PASSWORD': 'b9be63a7eccd1316476786dca71a3145cf2098c2fa8f31c3c2ea6c5f5f253a25'
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'todo',
-        'HOST': 'localhost',
+        'NAME': 'da3tb0l1sfrabg',
+        'HOST': 'ec2-23-23-182-238.compute-1.amazonaws.com',
         'PORT': 5432,
-        'USER': 'mukhammedmusa',
-        'PASSWORD': ''
+        'USER': 'qivypxvvnrcwdv',
+        'PASSWORD': 'b9be63a7eccd1316476786dca71a3145cf2098c2fa8f31c3c2ea6c5f5f253a25'
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'todo',
+#         'HOST': 'localhost',
+#         'PORT': 5432,
+#         'USER': 'mukhammedmusa',
+#         'PASSWORD': ''
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
