@@ -5,8 +5,18 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer, createUserSerializer
+from django.http import Http404
 
 # Create your views here.
+
+@api_view(['GET'])
+def retreave_user(request, pk):
+  try:
+    user = User.objects.get(id=pk)
+  except:
+    return Http404
+  serializer = UserSerializer(user)
+  return Response(serializer.data)
 
 @api_view(['POST'])
 def userLogin(request):
