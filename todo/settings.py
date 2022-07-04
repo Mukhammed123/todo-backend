@@ -25,13 +25,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-2hrh6ur)blv^%v@du1ilt@^o_vi88x!xl)5n_9mx96-gd)%c9z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 
-ALLOWED_HOSTS = ['fast-cliffs-03764.herokuapp.com', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['fast-cliffs-03764.herokuapp.com']
 
-CORS_ALLOWED_ORIGINS = ['https://organizeyourday.netlify.app', 'http://localhost:3000']
+CORS_ALLOWED_ORIGINS = ['https://organizeyourday.netlify.app']
 
 
 # Application definition
